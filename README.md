@@ -63,7 +63,7 @@ Each directory corresponds to a component, and contains a `Noopfile` that descri
 ```
 COMPONENT list-samples
 ROUTE -m GET /api/samples
-RESOURCE samples dynamodb
+RESOURCE samples dynamodb -p hashKeyName=id -p hashKeyType=S
 ENV SAMPLES_TABLE_NAME $.resources.samples.tableName
 FROM rearc/noop-nodejs-function:v6.11
 COPY package.json package.json
@@ -78,7 +78,7 @@ The `COMPONENT` directive tells noop what the name of the component is.
 
 The `ROUTE` directive tells noop how web requests should be routed to the component. In this case, it routes all HTTP `GET` requests for `/api/samples` to this component.
 
-The `RESOURCE` directive tells noop that this component depends on a DynamoDB resource named `samples`. If the `samples` resource is not available or does not meet the requirements of this directive (in this case, the only requirement being that it be DynamoDB), then the component cannot be deployed.
+The `RESOURCE` directive tells noop that this component depends on a DynamoDB resource named `samples`. If the `samples` resource is not available or does not meet the requirements of this directive (in this case, the only requirement being that it be DynamoDB), then the component cannot be deployed. The `-p hashKeyName=id -p hashKeyType=S` indicates that the DyanmoDB has a hash key named `id` of type string.
 
 The `ENV` directive works just like it does in a vanilla Dockerfile, except that the value can be a [JSON path](https://goessner.net/articles/JsonPath/) to a property from a part of the application. DynamoDB resources have a `tableName` property that is the name of the DynamoDB table of the resource, so `$.resources.samples.tableName` means "the `tableName` property of the `samples` resource.
 

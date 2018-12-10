@@ -1,5 +1,5 @@
-COMPONENT remove-sample
-ROUTE -m DELETE /api/samples/*
+COMPONENT ui
+ROUTE -m GET *
 RESOURCE samples dynamodb
 ENV SAMPLES_TABLE_NAME $.resources.samples.tableName
 FROM rearc/noop-nodejs-function:v6.11

@@ -1,7 +1,7 @@
 {
-  "name": "remove-sample",
+  "name": "ui",
   "version": "1.0.0",
-  "description": "Removes a sample from the list of samples being handed out",
+  "description": "Returns a UI to interact with samples",
   "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.373.0",

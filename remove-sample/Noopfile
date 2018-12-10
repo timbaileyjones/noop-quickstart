@@ -1,6 +1,6 @@
 COMPONENT remove-sample
 ROUTE -m DELETE /api/samples/*
-RESOURCE samples dynamodb
+RESOURCE samples dynamodb -p hashKeyName=id -p hashKeyType=S
 ENV SAMPLES_TABLE_NAME $.resources.samples.tableName
 FROM rearc/noop-nodejs-function:v6.11
 COPY package.json package.json

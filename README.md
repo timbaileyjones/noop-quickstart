@@ -29,16 +29,14 @@ A service *component* also executes some code in a container. The difference bet
 
 ## Getting Started
 
-First, you'll need to fork this repository in GitHub.
-
-Once you've forked the repo, you'll need to clone your fork to your local machine. If you haven't already, open up a terminal and enter:
+First, you'll need to fork this repository in GitHub. Open up `https://github.com/rearc/noop-quickstart` in a browser, click the `Fork` button in the upper right, and fork the repository into your account. Once you've forked the repo, you'll need to clone your fork to your local machine. If you haven't already, open up a terminal and enter:
 
 ```bash
-git clone git@github.com:rearc/noop-quickstart.git
+git clone git@github.com:MYACCOUNT/noop-quickstart.git
 cd noop-quickstart
 ```
 
-You'll notice that the sample app is organized into directories in the root of the repository:
+Make sure to replace `MYACCOUNT` with whatever your account name is in GitHub. Once cloned, you'll notice that the sample app is organized into directories in the root of the repository:
 
 ```bash
 noop-quickstart
@@ -112,116 +110,26 @@ Now that the application is running locally, open up a web browser and point it 
 
 ## Deploying into noop
 
+To deploy the application into noop, you'll need to open up the noop console in a web browser. It's available at `https://alpha.noop.app`. Currently, the only mechanism available for logging into the console is via a GitHub federated identity, so click the `Login with Github` button to create a noop account. If you are not already logged into GitHub in your browser session, you'll be prompted to do so. Once you have, you'll be prompted to allow noop read access to your Github identity if you haven't already.
 
+Once you've jumped through these hoops, you should see the noop console. The first thing you'll need to do is import the forked repository into your personal space in noop. Click `Personal Space` on the right side of the console home page. This is a special space that belongs solely to you.
 
+Click `Repos`. Here you can see a list of the repositories you've added to your personal space. To add the forked repository, click `New Repo`, and enter your GitHub user name in the `Owner/Organization Name` field, and the repository name (which will be `noop-quickstart` if you haven't changed it) into the `Project Name` field. Then, click `Submit`. You should see the repository added to your list of repositories.
 
-TODO building
-TODO decomposition
+Next, you'll need to create a new application from the repository you've just added. Click `Applications`. This is a list of the applications you've created in your personal space. Click `New App` to create a new application. Enter a name for your application in the `Application Name` field, choose the repository that you just added from the `Source Code Repo` drop down, and provide a description in the `Description` field. Then, click `Submit`. You should now see the application in the list of applications in your personal space.
 
-# -----
+Next, you'll need to create an environment for the application. An environment is a stand-alone running instance of the entire application, and you can have multiple environments for the same application (for example, dev and prod). Click the application you just created. You should see a list of environments for the application. Click `New Environment` to create a new environment for your application. You'll need to provide a name in the `Environment Name` field before clicking the `Submit` button. You should see a summary of the state of the environment you just created.
 
-Developers write code and provide noop with the application and environment config. Noop takes care of everything from there. A noop application is usually comprised of multiple components (services, functions, tasks etc.) and resources. Noop understands the application, its configuration, dependencies and has full context for every application transaction as it flows through the noop platform. This contextual awareness allows noop to provide deep insights and capabilities to the developer, making living with the app much simple yet powerful.
+Next, you'll want to create the `samples` DynamoDB resource. Click `Resources`. You should see a list of the resource for this environment. Click `New Resource` to see a list of the available resource types you can create. Click `DynamoDB Database`, and enter `samples` in the `Resource Name` field, and `id` in the `Hash Key Name`, and select `String` from the `Hash Key Type` drop down. Click `Create`, and a DynamoDB resource will be created for the environment.
 
-There is much more to noop. We have made noop in such a way that developers can easily express the application build and run parameters while removing all the other infrastructure and cloud heavy lifting. For the purposes of alpha, we want you to experience the platform as a developer so that we can learn from your experience. We are looking to know what you like and not like about noop.
+Now, let's build and deploy the application. Click `Builds` from the page for your environment. This page will show you all the builds for this application. In order to build a new version of the application, you'll need to provide a git ref in the `git ref` field to build the application. Enter `master` in the `git ref` field and click `Start Build`. You should see an entry for the build you just created in the `pending` state. As the build progresses, this state will change. Wait for the state to become `complete`, and then let's deploy the sample application.
 
-# Step 1: Clone the sample app
-We are providing a sample app for you to get started with noop. The noop sample application is comprised of multiple components (services and functions). Services are long-running processes while functions provide developers to simply express their application logic through code and allow the underlying container platform to manage concurrency.
+Click `Stage Build` for the build you just created. You should see the `Change Status` of the environment change, and a `Deploy Changes` button should become available. Click `Deploy Changes` to trigger a deployment. This will take a little while, so while we wait for that to finish, let's associate an endpoint with the environment, otherwise the environment would not be accessible once deployed.
 
-### Clone the sample app:
-```
-git clone git@github.com:rearc/noop-sample.git
-cd noop-sample
-```
-Browse the sample app repo and inspect the Noopfile.
+Click `Endpoints`. Here you will see a list of endpoints associated with the environment. Click `New Endpoint` to add one. Choose `alpha.noop.app` from the domain drop down, and enter the subdomain of `alpha.noop.app` you would like to use to access the environment. Click `Submit`, and you should see the endpoint you just created added to the list of endpoints for the envionment.
 
-Learn more about Noopfiles [here](https://github.com/rearc/noop-docs/Noopfile.md).
+Click the `Summary` page. When you application has been deployed, it will say that it is currently running the version of the build you deployed. To test its successful deployment, open `https://SUBDOMAIN.alpha.noop.app` in a web browser, where `SUBDOMAIN` is the subdomain you chose, to access your application.
 
-# Step 2: Install the Noop CLI and run Noop locally
-Noop CLI is an interactive command line interface for local development.
+Once your application is running, you can access the logs for each component by clicking `Components` for the environment and clicking the `View Logs` icon for the component.
 
-### Requirements for Noop CLI
-- node
-- git
-- docker
-
-### Package Install:
-`npm install -g @rearc/noop-cli`
-### Local Install:
-```
-git clone git@github.com:rearc/noop-cli.git
-cd noop-cli
-npm install
-npm link
-```
-### Noop Run:
-From within the git repo of the sample application, execute the following command to build and run your noop application locally.
-`noop run`
-
-In a different terminal window, use noop cli to analyze your current project directory to display summary information of your noop application.
-`noop inspect`
-
-# Step 3: Launch noop console
-
-1. Launch Noop Console by visiting https://alpha.noop.app
-Noop currently only supports federated login with Github. Click on `Login with Github`
-
-![github-login](/images/console-github-login.png)
-
-2. If you are not already logged in to github in your browser, you will have to log onto github by entering your github username and password.
-
-![github-login2](/images/console-github-login2.png)
-
-3. Once logged in, you should see the Noop console home. On the right hand corner, you should see `Organizations` you have access to. One of the organizations on the list should be your personal github org. Click on your personal org to manage your applications.
-
-![console-home](/images/console-home.png)
-
-## Step 5: Create a new repo, application, environment and an endpoint
-
-1. The first step to launching your noop application is to add the application repo to your organization.
-
-![add-repo](/images/console-add-repo.png)
-
-2. Create a new application by clicking on `New App` within the Applications view
-
-![create-application](/images/console-create-application.png)
-
-3. Create a new environment within the application
-
-![create-environment](/images/console-create-environment.png)
-
-4. Create a new endpoint within an environment
-
-![create-endpoint](/images/console-create-endpoint.png)
-
-## Step 6: Build and deploy your application
-
-1. Once an application environment is available, you can create new builds by supplying the branch name or the commit sha
-
-![start-build](/images/console-start-build.png)
-
-Currently, the build view does not auto-update when the build is complete. Go ahead and refresh the page after a minute to see if the build is complete.
-
-2. Once the build is complete, click on `Stage Build` and subsequently `Deploy Changes` on the far right.
-
-![stage-build-deploy](/images/console-stage-build-and-deploy.png)
-
-3. Again, the Deploy view will not automatically update (we are working on it). Refresh the page and you will be able to click on a link in the deploy view to see the deployment change status
-
-![deploy-status](/images/console-deploy-status.png)
-
-## Step 7:View component logs and access the endpoint
-
-If your application was successfully deployed, you will be able to click on `Components` on the left column and see a list of all your application components discovered by Noop.
-
-We are still working on the metric and other views. As of now, we have logs working within the console to help troubleshoot any application issues. On the Logging component of the sample app, click on the first icon to see logs for the `logging` component of the environment you created for the sample app. Within the log view, you will have a couple options to filter and retrieve logs.
-
-![components](/images/console-components.png)
-
-Finally, go to the `Endpoints` view and click on the endpoint to access the sample app page. Some example routes for the sample app are:
-
-- https://your-endpoint.alpha.noop.app/ (from ui service)
-- https://your-endpoint.alpha.noop.app/api (from api function)
-- https://your-endpoint.alpha.noop.app/bar (from anotherui service)
-- https://your-endpoint.alpha.noop.app/go/bar (from gohello service)
-
-## Step 8: Try running your awesome app on Noop and reach out if you have any questions!
+At this point, you're on your own. Please explore the noop console, and try to build and deploy an application that you actually care about. If you run into any issues, or have any questions or concerns, please reach out to us on the Slack channel.

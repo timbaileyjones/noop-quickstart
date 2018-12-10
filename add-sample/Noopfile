@@ -1,0 +1,9 @@
+COMPONENT add-sample
+ROUTE -m POST /api/samples
+RESOURCE samples dynamodb
+ENV SAMPLES_TABLE_NAME $.resources.samples.tableName
+FROM rearc/noop-nodejs-function:v6.11
+COPY package.json package.json
+RUN npm install
+COPY *.js /function/
+FUNCTION ["/function/index.js", "handler"]

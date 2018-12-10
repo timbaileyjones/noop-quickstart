@@ -1,0 +1,10 @@
+{
+  "name": "remove-sample",
+  "version": "1.0.0",
+  "description": "Removes a sample from the list of samples being handed out",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.373.0",
+    "express": "^4.16.4"
+  }
+}

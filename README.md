@@ -58,7 +58,7 @@ noop-quickstart
    └ index.js
 ```
 
-Each directory corresponds to a component, and contains a `Noopfile` that describes the component. Note that noop does not impose any sort of requirements on the structure of your application. Let's look at the noopfile for the component in `list-samples`:
+Each directory corresponds to a component, and contains a `Noopfile` that describes the component. The rest of the contents of the directories is regular old nodejs stuff. Note that noop does not impose any sort of requirements on the structure of your repository - you can use whatever structure you want. Let's look at the noopfile for the component in `list-samples`:
 
 ```
 COMPONENT list-samples

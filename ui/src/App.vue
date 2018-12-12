@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-    Sample Manager Sample App
-    <Welcome />
+    <Samples />
   </div>
 </template>
 
 <script>
-import Welcome from '@/components/Welcome.vue'
+import Samples from '@/components/Samples.vue'
 export default {
   components: {
-    Welcome
+    Samples
   }
 }
 </script>

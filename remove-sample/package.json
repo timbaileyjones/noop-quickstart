@@ -1,6 +1,6 @@
 {
   "name": "remove-sample",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Removes a sample from the list of samples being handed out",
   "main": "index.js",
   "dependencies": {

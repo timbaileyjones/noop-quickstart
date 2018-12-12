@@ -1,6 +1,6 @@
 {
   "name": "list-samples",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Lists all samples currently being handed out",
   "main": "index.js",
   "dependencies": {

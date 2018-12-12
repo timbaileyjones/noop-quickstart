@@ -1,6 +1,6 @@
 {
   "name": "add-sample",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Adds a sample to the list of samples being handed out",
   "main": "index.js",
   "dependencies": {

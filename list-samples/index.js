@@ -2,27 +2,21 @@ const AWS = require('aws-sdk')
 const Express = require('express')
 const app = new Express()
 
-AWS.config.update({region: 'us-east-1'})
-
-const aws_access_key_id = process.env.accessKey || 'fakeKey'
-const aws_secret_access_key = process.env.secretKey || 'keySecret'
-const SAMPLES_TABLE_NAME = process.env['SAMPLES_TABLE_NAME'] || 'samples'
+const endpoint = AWS.Endpoint(process.env['SAMPLES_DYNAMO_ENDPOINT'])
+const TableName = process.env['SAMPLES_TABLE_NAME']
 
 app.use(Express.json())
 
 app.all('*', (req, res) => {
-
   var config = {
-    "apiVersion": "2012-08-10",
-    "accessKeyId": "aws_access_key_id",
-    "secretAccessKey": "aws_secret_access_key",
-    "region":"us-east-1"
+    apiVersion: '2012-08-10',
+    endpoint
   }
 
   var db = new AWS.DynamoDB(config)
 
   var params = {
-    TableName: SAMPLES_TABLE_NAME
+    TableName
   }
 
   db.scan(params, (err, data) => {

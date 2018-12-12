@@ -4,17 +4,35 @@ const app = new Express()
 
 AWS.config.update({region: 'us-east-1'})
 
+const aws_access_key_id = process.env.accessKey || 'fakeKey'
+const aws_secret_access_key = process.env.secretKey || 'keySecret'
+const SAMPLES_TABLE_NAME = process.env['SAMPLES_TABLE_NAME'] || 'samples'
+
 app.use(Express.json())
 
 app.all('*', (req, res) => {
-  var db = new AWS.DynamoDB({apiVersion: '2012-10-08'})
+
+  var config = {
+    "apiVersion": "2012-08-10",
+    "accessKeyId": "aws_access_key_id",
+    "secretAccessKey": "aws_secret_access_key",
+    "region":"us-east-1"
+  }
+
+  var db = new AWS.DynamoDB(config)
 
   var params = {
     TableName: process.env['SAMPLES_TABLE_NAME'],
     Item: {
-      id: req.body.id,
-      name: req.body.name,
-      aisle: req.body.aisle
+      "id": {
+        S: req.body.id
+      },
+      "name": {
+        S: req.body.name
+      },
+      "aisle": {
+        S: req.body.aisle
+      }
     }
   }
 

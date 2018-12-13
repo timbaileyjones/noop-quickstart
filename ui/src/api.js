@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const addSample = (id, name, aisle) => {
-  return axios.post('/api/samples', {id, name, aisle})
+  return axios.post('/api/samples', { id, name, aisle })
 }
 
 export const removeSample = (id) => {

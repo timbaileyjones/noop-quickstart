@@ -13,7 +13,7 @@
         <th>Aisle</th>
         <th></th>
       </tr>
-      <tr v-for="sample in samples">
+      <tr v-for="sample in samples" :key="sample.id">
         <td>{{ sample.id }}</td>
         <td>{{ sample.name }}</td>
         <td>{{ sample.aisle }}</td>
@@ -24,33 +24,33 @@
 </template>
 
 <script>
-  import { addSample, listSamples, removeSample } from '@/api'
-  export default {
-    computed: {
-      samples: () => {
-        listSamples().then(response => {
-          return response.data
-        }).catch(err => {
-          alert(`Failed to get list of samples: ${err}`)
-        })
-      }
+import { addSample, listSamples, removeSample } from '@/api'
+export default {
+  computed: {
+    samples: () => {
+      listSamples().then(response => {
+        return response.data
+      }).catch(err => {
+        alert(`Failed to get list of samples: ${err}`)
+      })
     }
-    methods: {
-      startServing: () => {
-        addSample(this.props.id, this.props.name, this.props.aisle).then(response => {
-          this.$forceUpdate()
-        }).catch(err => {
-          alert(`Failed to start serving sample ${id}: ${err}`)
-        })
-      },
-      stopServing: (id) => {
-        removeSample(id).then(response => {
-          this.$forceUpdate()
-        }).catch(err => {
-          alert(`Failed to stop serving sample ${id}: ${err}`)
-        })
-      }
+  },
+  methods: {
+    startServing: () => {
+      addSample(this.props.id, this.props.name, this.props.aisle).then(response => {
+        this.$forceUpdate()
+      }).catch(err => {
+        alert(`Failed to start serving sample ${this.props.id}: ${err}`)
+      })
     },
-    props: ['id', 'name', 'aisle']
-  }
+    stopServing: (id) => {
+      removeSample(id).then(response => {
+        this.$forceUpdate()
+      }).catch(err => {
+        alert(`Failed to stop serving sample ${id}: ${err}`)
+      })
+    }
+  },
+  props: ['id', 'name', 'aisle']
+}
 </script>

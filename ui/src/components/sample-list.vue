@@ -35,12 +35,17 @@ export default {
       })
     }
   },
+  data: {
+    id: '',
+    name: '',
+    aisle: ''
+  },
   methods: {
     startServing: () => {
-      addSample(this.props.id, this.props.name, this.props.aisle).then(response => {
+      addSample(this.id, this.name, this.aisle).then(response => {
         this.$forceUpdate()
       }).catch(err => {
-        alert(`Failed to start serving sample ${this.props.id}: ${err}`)
+        alert(`Failed to start serving sample ${this.id}: ${err}`)
       })
     },
     stopServing: (id) => {
@@ -50,7 +55,6 @@ export default {
         alert(`Failed to stop serving sample ${id}: ${err}`)
       })
     }
-  },
-  props: ['id', 'name', 'aisle']
+  }
 }
 </script>

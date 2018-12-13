@@ -2,7 +2,7 @@ const AWS = require('aws-sdk')
 const Express = require('express')
 const app = new Express()
 
-const endpoint = new AWS.Endpoint(process.env['SAMPLES_ENDPOINT'])
+const endpoint = new AWS.Endpoint(process.env['SAMPLES_ENDPOINT']) || "https://dynamodb.us-east-1.amazonaws.com"
 const TableName = process.env['SAMPLES_TABLE']
 
 app.use(Express.json())

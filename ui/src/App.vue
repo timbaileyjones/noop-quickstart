@@ -1,14 +1,15 @@
 <template>
   <div id="app">
-    <Samples />
+    <sample-list />
   </div>
 </template>
 
 <script>
-import Samples from '@/components/Samples.vue'
+import SampleList from '@/components/sample-list'
+
 export default {
   components: {
-    Samples
+    SampleList
   }
 }
 </script>

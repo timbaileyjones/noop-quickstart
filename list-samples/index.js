@@ -21,7 +21,7 @@ app.all('*', (req, res) => {
 
   db.scan(params, (err, data) => {
     if (err) {
-      console.log(`Failed to scan items: ${err}`)
+      console.log(`Failed to scan items: ${err.message}`)
       res.status(500).json({message: 'something went wrong!'})
     } else {
       res.status(200).json(data.Items)

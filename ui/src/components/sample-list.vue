@@ -42,21 +42,21 @@ export default {
       listSamples().then(response => {
         this.samples = response.data
       }).catch(err => {
-        alert(`Failed to get list of samples: ${err}`)
+        alert(`Failed to get list of samples: ${err.message}`)
       })
     },
     startServing () {
       addSample(this.id, this.name, this.aisle).then(response => {
         this.getSamples()
       }).catch(err => {
-        alert(`Failed to start serving sample ${this.id}: ${err}`)
+        alert(`Failed to start serving sample ${this.id}: ${err.message}`)
       })
     },
     stopServing (id) {
       removeSample(id).then(response => {
         this.getSamples()
       }).catch(err => {
-        alert(`Failed to stop serving sample ${id}: ${err}`)
+        alert(`Failed to stop serving sample ${id}: ${err.message}`)
       })
     }
   }

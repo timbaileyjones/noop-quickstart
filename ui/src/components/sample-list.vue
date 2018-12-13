@@ -26,31 +26,35 @@
 <script>
 import { addSample, listSamples, removeSample } from '@/api'
 export default {
-  computed: {
-    samples: () => {
+  created () {
+    this.getSamples()
+  },
+  data () {
+    return {
+      id: '',
+      name: '',
+      aisle: '',
+      samples: []
+    }
+  },
+  methods: {
+    getSamples () {
       listSamples().then(response => {
-        return response.data
+        this.samples = response.data
       }).catch(err => {
         alert(`Failed to get list of samples: ${err}`)
       })
-    }
-  },
-  data: {
-    id: '',
-    name: '',
-    aisle: ''
-  },
-  methods: {
-    startServing: () => {
+    },
+    startServing () {
       addSample(this.id, this.name, this.aisle).then(response => {
-        this.$forceUpdate()
+        this.getSamples()
       }).catch(err => {
         alert(`Failed to start serving sample ${this.id}: ${err}`)
       })
     },
-    stopServing: (id) => {
+    stopServing (id) {
       removeSample(id).then(response => {
-        this.$forceUpdate()
+        this.getSamples()
       }).catch(err => {
         alert(`Failed to stop serving sample ${id}: ${err}`)
       })

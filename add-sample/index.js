@@ -2,8 +2,8 @@ const AWS = require('aws-sdk')
 const Express = require('express')
 const app = new Express()
 
-const endpoint = AWS.Endpoint(process.env['SAMPLES_DYNAMO_ENDPOINT'])
-const TableName = process.env['SAMPLES_TABLE_NAME']
+const endpoint = new AWS.Endpoint(process.env['SAMPLES_ENDPOINT'])
+const TableName = process.env['SAMPLES_TABLE']
 
 app.use(Express.json())
 
@@ -13,24 +13,18 @@ app.all('*', (req, res) => {
     endpoint
   }
 
-  var db = new AWS.DynamoDB(config)
+  var db = new AWS.DynamoDB.DocumentClient({ service: new AWS.DynamoDB(config) })
 
   var params = {
     TableName,
     Item: {
-      id: {
-        S: req.body.id
-      },
-      name: {
-        S: req.body.name
-      },
-      aisle: {
-        S: req.body.aisle
-      }
+      id: req.body.id,
+      name: req.body.name,
+      aisle: req.body.aisle
     }
   }
 
-  db.putItem(params, (err, data) => {
+  db.put(params, (err, data) => {
     if (err) {
       console.log(`Failed to put item ${req.body.id} with name ${req.body.name} in ${req.body.aisle}: ${err}`)
       res.status(500).json({message: 'something went wrong!'})

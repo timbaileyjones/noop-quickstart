@@ -1,7 +1,8 @@
 COMPONENT list-samples
 ROUTE -m GET /api/samples
 RESOURCE samples dynamodb -p hashKeyName=id -p hashKeyType=S
-ENV SAMPLES_TABLE_NAME $.resources.samples.tableName
+ENV SAMPLES_TABLE $.resources.samples.tableName
+ENV SAMPLES_ENDPOINT $.resources.samples.endpoint
 FROM rearc/noop-nodejs-function:v6.11
 COPY package.json package.json
 RUN npm install

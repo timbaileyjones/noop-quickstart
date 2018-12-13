@@ -2,8 +2,8 @@ const AWS = require('aws-sdk')
 const Express = require('express')
 const app = new Express()
 
-const endpoint = AWS.Endpoint(process.env['SAMPLES_DYNAMO_ENDPOINT'])
-const TableName = process.env['SAMPLES_TABLE_NAME']
+const endpoint = new AWS.Endpoint(process.env['SAMPLES_ENDPOINT'])
+const TableName = process.env['SAMPLES_TABLE']
 
 app.use(Express.json())
 
@@ -13,23 +13,21 @@ app.delete('/api/samples/:sampleId', (req, res) => {
     endpoint
   }
 
-  var db = new AWS.DynamoDB(config)
+  var db = new AWS.DynamoDB.DocumentClient({ service: new AWS.DynamoDB(config) })
 
   var params = {
     TableName,
     Key: {
-      id: {
-        S: req.params.sampleId
-      }
+      id: req.params.sampleId
     }
   }
 
-  db.deleteItem(params, (err, data) => {
+  db.delete(params, (err, data) => {
     if (err) {
       console.log(`Failed to delete sample with id ${req.params.sampleId}: ${err}`)
       res.status(500).json({message: 'something went wrong!'})
     } else {
-      res.status(201).json({message: `Succesfully deleted sample with id ${req.params.sampleId}`})
+      res.status(200).json({message: `Succesfully deleted sample with id ${req.params.sampleId}`})
     }
   })
 })

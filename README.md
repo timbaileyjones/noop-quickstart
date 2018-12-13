@@ -139,4 +139,6 @@ Click the `Summary` page. When you application has been deployed, it will say th
 
 Once your application is running, you can access the logs for each component by clicking `Components` for the environment and clicking the `View Logs` icon for the component.
 
-At this point, you're on your own. Please explore the noop console, and try to build and deploy an application that you actually care about. If you run into any issues, or have any questions or concerns, please reach out to us on the Slack channel.
+## Go forth, dear nooper, and build!
+
+At this point, you're ready to do some exploring on your own. Please take some time to try to build and deploy an application that you actually care about. If you run into any issues, or have any questions or concerns, please reach out to us on the Slack channel. If you want to learn more about the features that noop offers, please check out [the noop wiki](https://github.com/rearc/noop-quickstart/wiki).

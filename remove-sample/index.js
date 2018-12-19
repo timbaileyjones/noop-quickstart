@@ -24,7 +24,7 @@ app.delete('/api/samples/:sampleId', (req, res) => {
 
   db.delete(params, (err, data) => {
     if (err) {
-      console.log(`Failed to delete sample with id ${req.params.sampleId}: ${err.message}`)
+      console.log(`Failed to delete sample with id  ${req.params.sampleId}: ${err.message}`)
       res.status(500).json({message: 'something went wrong!'})
     } else {
       res.status(200).json({message: `Succesfully deleted sample with id ${req.params.sampleId}`})

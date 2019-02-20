@@ -25,7 +25,7 @@ console.log('Starting scan')
       console.log(`Failed to scan items: ${err.message}`)
       res.status(500).json({message: 'something went wrong!!'})
     } else {
-      console.log('Scan successful')
+      console.log('Scan successful.')
       res.status(200).json(data.Items)
     }
   })

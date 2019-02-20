@@ -1,2 +1,0 @@
-list-samples.SAMPLES_ENDPOINT=$.resources.samples.endpoint
-list-samples.SAMPLES_TABLE=$.resources.samples.tableName

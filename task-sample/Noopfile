@@ -1,4 +1,4 @@
-COMPONENT sample-task
+COMPONENT sampleTask
 RESOURCE samples dynamodb -p hashKeyName=id -p hashKeyType=S
 ENV SAMPLES_TABLE $.resources.samples.tableName
 ENV SAMPLES_ENDPOINT $.resources.samples.endpoint

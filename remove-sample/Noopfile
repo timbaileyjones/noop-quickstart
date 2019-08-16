@@ -1,4 +1,4 @@
-COMPONENT remove-sample
+COMPONENT removeSample
 ROUTE -m DELETE /api/samples/*
 RESOURCE samples dynamodb -p hashKeyName=id -p hashKeyType=S
 ENV SAMPLES_TABLE $.resources.samples.tableName

@@ -1,4 +1,4 @@
-COMPONENT list-samples
+COMPONENT listSamples
 ROUTE -m GET /api/samples
 RESOURCE samples dynamodb -p hashKeyName=id -p hashKeyType=S
 ENV SAMPLES_TABLE $.resources.samples.tableName

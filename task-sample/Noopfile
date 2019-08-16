@@ -1,0 +1,12 @@
+COMPONENT sampleTask
+RESOURCE samples dynamodb -p hashKeyName=id -p hashKeyType=S
+ENV SAMPLES_TABLE $.resources.samples.tableName
+ENV SAMPLES_ENDPOINT $.resources.samples.endpoint
+LIFECYCLE predeploy
+CRON */2 * * * *
+FROM node:alpine
+WORKDIR /component
+COPY package.json .
+RUN npm install
+COPY *.js .
+TASK node index.js

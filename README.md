@@ -104,7 +104,7 @@ docker ps
 Once these prerequisites are met, in the terminal you opened earlier, use:
 
 ```bash
-npm install -g @rearc/noop-cli
+npm install -g @rearc/noop-local
 ```
 
 This will install the noop CLI globally, so it will be available from anywhere on your system. Let's try running the application locally. Presuming you're still in the `noop-quickstart` directory, use:

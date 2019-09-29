@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-card title="Samples currently being served">
+    <b-card title="Events currently being served">
       <table class="table table-striped table-sm">
         <thead>
           <tr>
@@ -11,11 +11,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="sample in samples" :key="sample.id">
-            <th scope="row">{{ sample.id }}</th>
-            <td>{{ sample.name }}</td>
-            <td>{{ sample.aisle }}</td>
-            <td><button class="btn-danger" @click.stop="stopServing(sample.id)">Stop Serving</button></td>
+          <tr v-for="event in events" :key="event.id">
+            <th scope="row">{{ event.id }}</th>
+            <td>{{ event.name }}</td>
+            <td>{{ event.aisle }}</td>
+            <td><button class="btn-danger" @click.stop="stopServing(event.id)">Stop Serving</button></td>
           </tr>
         </tbody>
         <tr>
@@ -30,42 +30,42 @@
 </template>
 
 <script>
-import { addSample, listSamples, removeSample } from '@/api'
+import { addEvent, listEvents, removeEvent } from '@/api'
 export default {
   created () {
-    this.getSamples()
+    this.getEvents()
   },
   data () {
     return {
       id: '',
       name: '',
       aisle: '',
-      samples: []
+      events: []
     }
   },
   methods: {
-    getSamples () {
-      listSamples().then(response => {
-        this.samples = response.data
+    getEvents () {
+      listEvents().then(response => {
+        this.events = response.data
       }).catch(err => {
-        alert(`Failed to get list of samples: ${err.message}`)
+        alert(`Failed to get list of events: ${err.message}`)
       })
     },
     startServing () {
-      addSample(this.id, this.name, this.aisle).then(response => {
+      addEvent(this.id, this.name, this.aisle).then(response => {
         this.id = ''
         this.name = ''
         this.aisle = ''
-        this.getSamples()
+        this.getEvents()
       }).catch(err => {
-        alert(`Failed to start serving sample ${this.id}: ${err.message}`)
+        alert(`Failed to start serving event ${this.id}: ${err.message}`)
       })
     },
     stopServing (id) {
-      removeSample(id).then(response => {
-        this.getSamples()
+      removeEvent(id).then(response => {
+        this.getEvents()
       }).catch(err => {
-        alert(`Failed to stop serving sample ${id}: ${err.message}`)
+        alert(`Failed to stop serving event ${id}: ${err.message}`)
       })
     }
   }

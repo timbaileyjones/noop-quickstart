@@ -1,0 +1,12 @@
+COMPONENT addEvent
+ROUTE -m POST /api/events
+RESOURCE events dynamodb -p hashKeyName=id -p hashKeyType=S
+ENV EVENTS_TABLE $.resources.events.tableName
+ENV EVENTS_ENDPOINT $.resources.events.endpoint
+
+FROM rearc/noop-nodejs-function:v6.11
+COPY package.json package.json
+RUN npm install
+COPY *.js /function/
+
+FUNCTION ["/function/index.js", "handler"]

@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-export const addSample = (id, name, aisle) => {
-  return axios.post('/api/samples', { id, name, aisle })
+export const addEvent = (id, name, aisle) => {
+  return axios.post('/api/events', { id, name, aisle })
 }
 
-export const removeSample = (id) => {
-  return axios.delete(`/api/samples/${id}`)
+export const removeEvent = (id) => {
+  return axios.delete(`/api/events/${id}`)
 }
 
-export const listSamples = () => {
-  return axios.get('/api/samples')
+export const listEvents = () => {
+  return axios.get('/api/events')
 }

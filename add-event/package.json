@@ -1,7 +1,7 @@
 {
-  "name": "list-samples",
+  "name": "add-event",
   "version": "0.1.0",
-  "description": "Lists all samples currently being handed out",
+  "description": "Adds a event to the list of events being handed out",
   "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.373.0",

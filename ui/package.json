@@ -1,6 +1,6 @@
 {
   "name": "ui",
-  "description": "Returns a UI to interact with samples",
+  "description": "Returns a UI to interact with events",
   "version": "0.1.0",
   "private": true,
   "scripts": {

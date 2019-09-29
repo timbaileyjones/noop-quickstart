@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <sample-list />
+    <event-list />
   </div>
 </template>
 
 <script>
-import SampleList from '@/components/sample-list'
+import EventList from '@/components/event-list'
 
 export default {
   components: {
-    SampleList
+    EventList
   }
 }
 </script>

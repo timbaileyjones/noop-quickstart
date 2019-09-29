@@ -2,8 +2,8 @@ const AWS = require('aws-sdk')
 const Express = require('express')
 const app = new Express()
 
-const endpoint = new AWS.Endpoint(process.env['SAMPLES_ENDPOINT'])
-const TableName = process.env['SAMPLES_TABLE']
+const endpoint = new AWS.Endpoint(process.env['EVENTS_ENDPOINT'])
+const TableName = process.env['EVENTS_TABLE']
 
 app.use(Express.json())
 

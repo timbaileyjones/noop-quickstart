@@ -1,7 +1,7 @@
 {
-  "name": "remove-sample",
+  "name": "remove-event",
   "version": "0.1.0",
-  "description": "Removes a sample from the list of samples being handed out",
+  "description": "Removes a event from the list of events being handed out",
   "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.373.0",
